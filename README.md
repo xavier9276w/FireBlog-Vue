@@ -1,5 +1,8 @@
 # fireblogs
 
+## Purpose of project
+Demonstrate personal learning journey of using Vue and Firebase. There are functions and navigations that are not completed yet.
+
 ## Project setup
 ```
 npm install
