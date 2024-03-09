@@ -5,7 +5,7 @@
         <h2 v-if="post.welcomeScreen">{{ post.title }}</h2>
         <h2 v-else>{{ post.blogTitle }}</h2>
         <p v-if="post.welcomeScreen">{{ post.blogPost }}</p>
-        <p class="content-preview" v-else v-html="post.blogHTML"></p>
+        <p class="content-preview" v-html="post.blogHTML"></p>
         <router-link class="link link-light" v-if="post.welcomeScreen" to="#">
           Login/Register<Arrow class="arrow arrow-light" />
         </router-link>
@@ -34,7 +34,7 @@ import Arrow from "../assets/Icons/arrow-right-light.svg";
 export default {
   name: "blogPost",
   components: {
-    Arrow
+    Arrow,
   },
   props: ["post"],
   data() {
@@ -44,8 +44,8 @@ export default {
   computed: {
     user() {
       return this.$store.state.user;
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -100,9 +100,10 @@ export default {
 
       .content-preview {
         font-size: 13px;
-        max-height: 24px;
-        width: 250px; // remove this after have real data
-        white-space: nowrap;
+        max-height: 60px;
+        // max-height: 650px;
+        // width: 250px; // remove this after have real data
+        // white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis; // append three dot at the end of the content ...
       }

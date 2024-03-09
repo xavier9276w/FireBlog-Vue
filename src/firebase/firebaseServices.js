@@ -1,4 +1,4 @@
-import { db } from "./firebaseInit"; // Adjust this path to where you initialize your Firebase app and Firestore
+import db from "./firebaseInit";
 
 // Function from the previous example to generate a Firebase-friendly ID
 function generateFirebaseDocID(inputString) {
@@ -7,7 +7,10 @@ function generateFirebaseDocID(inputString) {
 
   // Remove or replace other unwanted characters, like slashes, periods, etc.
   // This is a basic set; adjust according to your needs
-  docId = docId.replace(/[\.\*\/\[\]]/g, "");
+  docId = docId.replace(/[.*[\]/]/g, "");
+
+  // Remove leading/trailing underscores
+  docId = docId.replace(/^_+|_+$/g, "");
 
   // Encode to ensure UTF-8 compliance and remove leading/trailing underscores
   docId = encodeURIComponent(docId).replace(/^_+|_+$/g, "");

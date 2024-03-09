@@ -49,7 +49,7 @@
 import BlogCoverPreview from "../components/BlogCoverPreview.vue";
 import firebase from "firebase/app";
 import "firebase/storage";
-import getUniqueDocId from "../firebase/firebaseServices";
+import { getUniqueDocId } from "../firebase/firebaseServices";
 import db from "../firebase/firebaseInit";
 import Quill from "quill";
 import Loading from "../components/Loading.vue";
@@ -68,14 +68,14 @@ export default {
       loading: null,
       editorSettings: {
         modules: {
-          imageResize: {}
-        }
-      }
+          imageResize: {},
+        },
+      },
     };
   },
   components: {
     BlogCoverPreview,
-    Loading
+    Loading,
   },
   methods: {
     fileChange() {
@@ -92,10 +92,10 @@ export default {
       const docRef = storageRef.child(`documents/blogPostPhotos/${file.name}`);
       docRef.put(file).on(
         "state_changed",
-        snapshot => {
+        (snapshot) => {
           console.log(snapshot);
         },
-        err => {
+        (err) => {
           console.log(err);
         },
         async () => {
@@ -117,18 +117,17 @@ export default {
           );
           docRef.put(this.file).on(
             "state_changed",
-            snapshot => {
+            (snapshot) => {
               console.log(snapshot);
             },
-            err => {
+            (err) => {
               console.log(err);
               this.loading = false;
             },
             async () => {
               const downloadURL = await docRef.getDownloadURL();
               const timestamp = await Date.now();
-              const docId = await getUniqueDocId(blogTitle);
-              console.log(`docId = ${docId}`);
+              const docId = await getUniqueDocId(this.blogTitle);
               const dataBase = await db.collection("blogPosts").doc(docId);
               await dataBase.set({
                 blogID: dataBase.id,
@@ -137,13 +136,13 @@ export default {
                 blogCoverPhoto: downloadURL,
                 blogCoverPhotoName: this.blogCoverPhotoName,
                 profileId: this.profileId,
-                date: timestamp
+                date: timestamp,
               });
               await this.$store.dispatch("getPost");
               this.loading = false;
               this.$router.push({
                 name: "ViewBlog",
-                params: { blogid: dataBase.id }
+                params: { blogid: dataBase.id },
               });
             }
           );
@@ -163,7 +162,7 @@ export default {
         this.error = false;
       }, 5000);
       return;
-    }
+    },
   },
   computed: {
     profileId() {
@@ -178,7 +177,7 @@ export default {
       },
       set(payload) {
         this.$store.commit("updateBlogTitle", payload);
-      }
+      },
     },
     blogHTML: {
       get() {
@@ -186,9 +185,9 @@ export default {
       },
       set(payload) {
         this.$store.commit("newBlogPost", payload);
-      }
-    }
-  }
+      },
+    },
+  },
 };
 </script>
 
