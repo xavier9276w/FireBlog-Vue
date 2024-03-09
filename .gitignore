@@ -22,4 +22,5 @@ pnpm-debug.log*
 *.sln
 *.sw?
 storage.rules
-firestore.rules
+src/firebase/firebaseInit.js
+src/firebase/firebaseInit
