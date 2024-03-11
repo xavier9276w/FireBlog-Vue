@@ -17,7 +17,6 @@
           new Date(post.blogDate).toLocaleString("en-us", { dateStyle: "long" })
         }}
       </h6>
-      <!-- <p class="content-preview" v-html="post.blogHTML"></p> -->
       <router-link
         class="link"
         :to="{ name: 'ViewBlog', params: { blogid: this.post.blogID } }"
@@ -131,6 +130,7 @@ export default {
     z-index: 3;
     padding: 32px 16px;
     color: #000;
+
     h4 {
       padding-bottom: 8px;
       font-size: 20px;
@@ -143,15 +143,6 @@ export default {
       padding-bottom: 16px;
     }
 
-    // .content-preview {
-    //   font-size: 13px;
-    //   max-height: 60px;
-    //   flex-grow: 1;
-    //   // width: 250px; // remove this after have real data
-    //   // white-space: nowrap;
-    //   overflow: hidden;
-    //   text-overflow: ellipsis;
-    // }
     .link {
       display: inline-flex;
       align-items: center;

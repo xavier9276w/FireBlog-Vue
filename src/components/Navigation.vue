@@ -21,7 +21,7 @@
           >
         </ul>
         <div
-          v-if="user"
+          v-if="user && !mobile"
           v-on:click="toggleProfileMenu"
           class="profile"
           ref="profile"
@@ -74,6 +74,13 @@
         <router-link v-if="!user" class="link" :to="{ name: 'Login' }"
           >Login/Register</router-link
         >
+        <router-link v-if="user" class="link" :to="{ name: 'Profile' }"
+          >Profile</router-link
+        >
+        <router-link v-if="user" class="link" :to="{ name: 'Admin' }"
+          >Admin</router-link
+        >
+        <p v-if="user" class="link mobileLogout" @click="logOut">Logout</p>
       </ul>
     </transition>
   </header>
@@ -93,14 +100,14 @@ export default {
     menuIcon,
     userIcon,
     adminIcon,
-    logoutIcon
+    logoutIcon,
   },
   data() {
     return {
       mobile: null, // boolean
       mobileNav: null, // boolean
       windowWidth: null,
-      profileMenu: false
+      profileMenu: false,
     };
   },
   created() {
@@ -129,7 +136,7 @@ export default {
     logOut() {
       firebase.auth().signOut();
       window.location.reload();
-    }
+    },
   },
   computed: {
     user() {
@@ -137,8 +144,8 @@ export default {
     },
     admin() {
       return this.$store.state.profileAdmin;
-    }
-  }
+    },
+  },
   // watch: {},
   // mounted() {},
 };
@@ -291,9 +298,13 @@ header {
     background-color: #303030;
     top: 0;
     left: 0;
+
     .link {
       padding: 15px 0;
       color: #fff;
+    }
+    .mobileLogout {
+      margin-top: auto;
     }
   }
   .mobile-nav-enter-active,
