@@ -70,7 +70,9 @@
       <ul class="mobile-nav" v-show="mobileNav">
         <router-link class="link" :to="{ name: 'Home' }">Home</router-link>
         <router-link class="link" :to="{ name: 'Blogs' }">Blogs</router-link>
-        <router-link v-if="admin" class="link" to="#">Create Post</router-link>
+        <router-link v-if="admin" class="link" :to="{ name: 'CreatePost' }"
+          >Create Post</router-link
+        >
         <router-link v-if="!user" class="link" :to="{ name: 'Login' }"
           >Login/Register</router-link
         >
@@ -110,11 +112,43 @@ export default {
       profileMenu: false,
     };
   },
+  watch: {
+    // Watching for route changes
+    $route() {
+      this.mobileNav = false;
+      this.profileMenu = false;
+    },
+    mobileNav(newValue) {
+      if (newValue) {
+        document.addEventListener("click", this.handleOutsideClick);
+      } else {
+        document.removeEventListener("click", this.handleOutsideClick);
+      }
+    },
+    profileMenu(newValue) {
+      if (newValue) {
+        document.addEventListener("click", this.handleOutsideClick);
+      } else {
+        document.removeEventListener("click", this.handleOutsideClick);
+      }
+    },
+  },
   created() {
     window.addEventListener("resize", this.checkScreen);
     this.checkScreen(); // when this component first created
   },
   methods: {
+    handleOutsideClick(e) {
+      // Ensure the click is not on the menu itself or any of its descendants
+      if (!this.$el.contains(e.target)) {
+        this.profileMenu = false;
+        this.mobileNav = false;
+      }
+    },
+    beforeDestroy() {
+      // Clean up the event listener when the component is destroyed
+      document.removeEventListener("click", this.handleOutsideClick);
+    },
     checkScreen() {
       this.windowWidth = window.innerWidth;
       if (this.windowWidth <= 750) {

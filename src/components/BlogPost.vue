@@ -5,7 +5,6 @@
         <h2 v-if="post.welcomeScreen">{{ post.title }}</h2>
         <h2 v-else>{{ post.blogTitle }}</h2>
         <p v-if="post.welcomeScreen">{{ post.blogPost }}</p>
-        <p class="content-preview" v-html="post.blogHTML"></p>
         <router-link class="link link-light" v-if="post.welcomeScreen" to="#">
           Login/Register<Arrow class="arrow arrow-light" />
         </router-link>
@@ -56,8 +55,8 @@ export default {
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
     0 2px 4px -1px rgba(0, 0, 0, 0.06);
   @media (min-width: 700px) {
-    min-height: 650px;
-    max-height: 650px;
+    min-height: 400px;
+    max-height: 600px;
     flex-direction: row;
   }
 

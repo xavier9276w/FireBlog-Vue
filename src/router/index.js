@@ -23,8 +23,8 @@ const routes = [
     component: Home,
     meta: {
       title: "Home",
-      requiresAuth: false
-    }
+      requiresAuth: false,
+    },
   },
   {
     path: "/blogs",
@@ -32,8 +32,8 @@ const routes = [
     component: Blogs,
     meta: {
       title: "Blogs",
-      requiresAuth: false
-    }
+      requiresAuth: false,
+    },
   },
   {
     path: "/login",
@@ -41,8 +41,8 @@ const routes = [
     component: Login,
     meta: {
       title: "Login",
-      requiresAuth: false
-    }
+      requiresAuth: false,
+    },
   },
   {
     path: "/register",
@@ -50,8 +50,8 @@ const routes = [
     component: Register,
     meta: {
       title: "Register",
-      requiresAuth: false
-    }
+      requiresAuth: false,
+    },
   },
   {
     path: "/forgot-password",
@@ -59,8 +59,8 @@ const routes = [
     component: ForgotPassword,
     meta: {
       title: "Forgot Password",
-      requiresAuth: false
-    }
+      requiresAuth: false,
+    },
   },
   {
     path: "/profile",
@@ -68,8 +68,8 @@ const routes = [
     component: Profile,
     meta: {
       title: "Profile",
-      requiresAuth: true
-    }
+      requiresAuth: true,
+    },
   },
   {
     path: "/admin",
@@ -78,8 +78,8 @@ const routes = [
     meta: {
       title: "Admin",
       requiresAuth: true,
-      requiresAdmin: true
-    }
+      requiresAdmin: true,
+    },
   },
   {
     path: "/create-post",
@@ -88,8 +88,8 @@ const routes = [
     meta: {
       title: "Create Post",
       requiresAuth: true,
-      requiresAdmin: true
-    }
+      requiresAdmin: true,
+    },
   },
   {
     path: "/post-preview",
@@ -98,8 +98,8 @@ const routes = [
     meta: {
       title: "Preview Blog Post",
       requiresAuth: true,
-      requiresAdmin: true
-    }
+      requiresAdmin: true,
+    },
   },
   {
     path: "/view-blog/:blogid",
@@ -107,8 +107,8 @@ const routes = [
     component: ViewBlog,
     meta: {
       title: "View Blog Post",
-      requiresAuth: false
-    }
+      requiresAuth: false,
+    },
   },
   {
     path: "/edit-blog/:blogid",
@@ -117,9 +117,9 @@ const routes = [
     meta: {
       title: "Edit Blog Post",
       requiresAuth: true,
-      requiresAdmin: true
-    }
-  }
+      requiresAdmin: true,
+    },
+  },
 ];
 
 const router = new VueRouter({
@@ -128,7 +128,7 @@ const router = new VueRouter({
   routes,
   scrollBehavior() {
     return { x: 0, y: 0 };
-  }
+  },
 });
 
 router.beforeEach((to, from, next) => {
@@ -143,9 +143,9 @@ router.beforeEach(async (to, from, next) => {
     let token = await user.getIdTokenResult();
     admin = token.claims.admin;
   }
-  if (to.matched.some(res => res.meta.requiresAuth)) {
+  if (to.matched.some((res) => res.meta.requiresAuth)) {
     if (user) {
-      if (to.matched.some(res => res.meta.requiresAdmin)) {
+      if (to.matched.some((res) => res.meta.requiresAdmin)) {
         if (admin) {
           return next();
         }
