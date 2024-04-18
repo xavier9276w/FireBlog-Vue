@@ -20,8 +20,8 @@ export default {
     },
     blogCoverPhoto() {
       return this.$store.state.blogPhotoFileURL;
-    }
-  }
+    },
+  },
 };
 </script>
 

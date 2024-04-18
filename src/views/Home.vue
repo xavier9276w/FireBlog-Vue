@@ -44,11 +44,10 @@ export default {
         blogPost:
           "Share your unique travel experience in articles! Give thoughts to people who wish to be there!",
         welcomeScreen: true,
-        photo: "travel"
-      }
+        photo: "travel",
+      },
     };
   },
-  methods: {},
   computed: {
     blogPostsFeed() {
       return this.$store.getters.blogPostsFeed;
@@ -57,10 +56,9 @@ export default {
       return this.$store.getters.blogPostsCards;
     },
     user() {
-      console.log(this.$store.getters.blogPosts);
       return this.$store.state.user;
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -79,7 +77,6 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
-
     @media (min-width: 800px) {
       padding: 125px 25px;
       flex-direction: row;
@@ -87,9 +84,8 @@ export default {
 
     .router-button {
       display: flex;
-      // flex-direction: column;
-      text-decoration: none;
       font-size: 14px;
+      text-decoration: none;
       @media (min-width: 800px) {
         margin-left: auto;
       }

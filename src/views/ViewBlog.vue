@@ -6,7 +6,7 @@
         Posted on:
         {{
           new Date(this.currentBlog.blogDate).toLocaleString("en-us", {
-            dateStyle: "long"
+            dateStyle: "long",
           })
         }}
       </h4>
@@ -24,14 +24,14 @@ export default {
   name: "ViewBlog",
   data() {
     return {
-      currentBlog: null
+      currentBlog: null,
     };
   },
   async mounted() {
-    this.currentBlog = await this.$store.state.blogPosts.filter(post => {
+    this.currentBlog = await this.$store.state.blogPosts.filter((post) => {
       return post.blogID == this.$route.params.blogid;
     })[0];
-  }
+  },
 };
 </script>
 <style lang="scss">

@@ -18,22 +18,18 @@ export default {
   name: "app",
   components: {
     Navigation,
-    Footer
+    Footer,
   },
   data() {
     return {
-      navigation: null
+      navigation: null,
     };
   },
   created() {
-    console.log("App created");
-    firebase.auth().onAuthStateChanged(user => {
-      console.log("Updating user");
+    firebase.auth().onAuthStateChanged((user) => {
       this.$store.commit("updateUser", user);
       if (user) {
-        console.log("User is logged in", user);
         this.$store.dispatch("getCurrentUser", user);
-        return;
       }
     });
     this.checkRoute();
@@ -51,13 +47,13 @@ export default {
         return;
       }
       this.navigation = false;
-    }
+    },
   },
   watch: {
     $route() {
       this.checkRoute();
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -96,12 +92,10 @@ export default {
 .arrow {
   margin-left: 8px;
   width: 12px;
-
   path {
     fill: #000;
   }
 }
-
 .arrow-light {
   path {
     fill: #fff;
@@ -137,7 +131,6 @@ button,
   font-size: 15px;
   font-weight: 500;
   background-color: transparent;
-
   @media (min-width: 700px) {
     margin-top: 0;
     margin-left: auto;

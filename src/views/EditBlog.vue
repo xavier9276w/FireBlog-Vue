@@ -1,5 +1,5 @@
-<template
-  ><div class="create-post">
+<template>
+  <div class="create-post">
     <BlogCoverPreview v-show="this.$store.state.blogPhotoPreview" />
     <Loading v-show="loading" />
     <div class="container">
@@ -69,18 +69,18 @@ export default {
       currentBlog: null,
       editorSettings: {
         modules: {
-          imageResize: {}
-        }
-      }
+          imageResize: {},
+        },
+      },
     };
   },
   components: {
     BlogCoverPreview,
-    Loading
+    Loading,
   },
   async mounted() {
     this.routeID = this.$route.params.blogid;
-    this.currentBlog = this.$store.state.blogPosts.filter(post => {
+    this.currentBlog = this.$store.state.blogPosts.filter((post) => {
       return post.blogID == this.routeID;
     })[0];
     this.$store.commit("setBlogState", this.currentBlog);
@@ -100,10 +100,10 @@ export default {
       const docRef = storageRef.child(`documents/blogPostPhotos/${file.name}`);
       docRef.put(file).on(
         "state_changed",
-        snapshot => {
+        (snapshot) => {
           console.log(snapshot);
         },
-        err => {
+        (err) => {
           console.log(err);
         },
         async () => {
@@ -126,10 +126,10 @@ export default {
           );
           docRef.put(this.file).on(
             "state_changed",
-            snapshot => {
+            (snapshot) => {
               console.log(snapshot);
             },
-            err => {
+            (err) => {
               console.log(err);
               this.loading = false;
             },
@@ -140,13 +140,13 @@ export default {
                 blogTitle: this.blogTitle,
                 blogHTML: this.blogHTML,
                 blogCoverPhoto: downloadURL,
-                blogCoverPhotoName: this.blogCoverPhotoName
+                blogCoverPhotoName: this.blogCoverPhotoName,
               });
               await this.$store.dispatch("updatePost", this.routeID);
               this.loading = false;
               this.$router.push({
                 name: "ViewBlog",
-                params: { blogid: dataBase.id }
+                params: { blogid: dataBase.id },
               });
             }
           );
@@ -157,13 +157,13 @@ export default {
         this.loading = true;
         await dataBase.update({
           blogTitle: this.blogTitle,
-          blogHTML: this.blogHTML
+          blogHTML: this.blogHTML,
         });
         await this.$store.dispatch("updatePost", this.routeID);
         this.loading = false;
         this.$router.push({
           name: "ViewBlog",
-          params: { blogid: dataBase.id }
+          params: { blogid: dataBase.id },
         });
         return;
       }
@@ -173,7 +173,7 @@ export default {
         this.error = false;
       }, 5000);
       return;
-    }
+    },
   },
   computed: {
     profileId() {
@@ -188,7 +188,7 @@ export default {
       },
       set(payload) {
         this.$store.commit("updateBlogTitle", payload);
-      }
+      },
     },
     blogHTML: {
       get() {
@@ -196,9 +196,9 @@ export default {
       },
       set(payload) {
         this.$store.commit("newBlogPost", payload);
-      }
-    }
-  }
+      },
+    },
+  },
 };
 </script>
 

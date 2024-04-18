@@ -1,5 +1,5 @@
-<template
-  ><div class="create-post">
+<template>
+  <div class="create-post">
     <BlogCoverPreview v-show="this.$store.state.blogPhotoPreview" />
     <Loading v-show="loading" />
     <div class="container">
@@ -47,12 +47,12 @@
 
 <script>
 import BlogCoverPreview from "../components/BlogCoverPreview.vue";
+import Loading from "../components/Loading.vue";
 import firebase from "firebase/app";
 import "firebase/storage";
 import { getUniqueDocId } from "../firebase/firebaseServices";
 import db from "../firebase/firebaseInit";
 import Quill from "quill";
-import Loading from "../components/Loading.vue";
 
 window.Quill = Quill;
 const ImageResize = require("quill-image-resize-module").default;
@@ -105,9 +105,8 @@ export default {
         }
       );
     },
-    resetUploader() {},
     uploadBlog() {
-      if (this.blogTitle.length !== 0 && this.blogHTML.length != 0) {
+      if (this.blogTitle.length !== 0 && this.blogHTML.length !== 0) {
         // the user has filled in the title and content
         if (this.file) {
           this.loading = true;
@@ -150,7 +149,7 @@ export default {
           return;
         }
         this.error = true;
-        this.errorMsg = "Please ensure you uploaded a cover photo";
+        this.errorMsg = "Please ensure you uploaded a cover photo!";
         setTimeout(() => {
           this.error = false;
         }, 5000);
@@ -219,7 +218,7 @@ export default {
     text-decoration: none;
 
     &:hover {
-      background-color: rgba(48, 48, 48, 0.7) "";
+      background-color: rgba(48, 48, 48, 0.7);
     }
   }
 
