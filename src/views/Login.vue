@@ -101,14 +101,14 @@ export default {
     password,
     facebook,
     google,
-    twitter
+    twitter,
   },
   data() {
     return {
       email: "",
       password: "",
       error: null,
-      errorMsg: ""
+      errorMsg: "",
     };
   },
   methods: {
@@ -124,7 +124,7 @@ export default {
           console.log(firebase.auth().currentUser.uid);
           //   var user = userCredential.user;
         })
-        .catch(err => {
+        .catch((err) => {
           this.err = true;
           this.err = err.message;
         });
@@ -150,7 +150,7 @@ export default {
       firebase
         .auth()
         .signInWithPopup(provider)
-        .then(result => {
+        .then((result) => {
           if (result.additionalUserInfo.isNewUser) {
             const user = result.user;
             var names = user.displayName.split(" ");
@@ -166,7 +166,7 @@ export default {
                 username: username,
                 email: user.email,
                 firstName: firstName,
-                lastName: lastName
+                lastName: lastName,
               })
               .then(() => {
                 this.$router.push({ name: "Home" });
@@ -181,7 +181,7 @@ export default {
             console.log(firebase.auth().currentUser.uid);
           }
         })
-        .catch(err => {
+        .catch((err) => {
           if (err.code === "auth/account-exists-with-different-credential") {
             var pendingCred = err.credential;
             // The provider account's email address.
@@ -189,7 +189,7 @@ export default {
             firebase
               .auth()
               .fetchSignInMethodsForEmail(email)
-              .then(methods => {
+              .then((methods) => {
                 // if the user already registered using password and try to login with google
                 if (methods[0] === "password") {
                   // In real scenario, you should handle this asynchronously.
@@ -197,10 +197,10 @@ export default {
                   firebase
                     .auth()
                     .signInWithEmailAndPassword(email, password)
-                    .then(result => {
+                    .then((result) => {
                       return result.user.linkWithCredential(pendingCred);
                     })
-                    .then(function() {
+                    .then(function () {
                       // Google account successfully linked to the existing Firebase user.
                       this.$router.push({ name: "Home" });
                     });
@@ -217,7 +217,7 @@ export default {
                 firebase
                   .auth()
                   .signInWithPopup(provider)
-                  .then(function(result) {
+                  .then(function (result) {
                     // Remember that the user may have signed in with an account that has a different email
                     // address than the first one. This can happen as Firebase doesn't control the provider's
                     // sign in flow and the user is free to login using whichever account they own.
@@ -227,7 +227,7 @@ export default {
                     // As we have access to the pending credential, we can directly call the link method.
                     result.user
                       .linkWithCredential(pendingCred)
-                      .then(function() {
+                      .then(function () {
                         // Google account successfully linked to the existing Firebase user.
                         this.$router.push({ name: "Home" });
                       });
@@ -239,8 +239,8 @@ export default {
         });
     },
     signInWithFacebook() {},
-    signInWithTwitter() {}
-  }
+    signInWithTwitter() {},
+  },
 };
 </script>
 
@@ -259,6 +259,7 @@ export default {
 
   .login-register {
     margin-bottom: 32px;
+    text-align: center;
 
     .router-link {
       color: #000;
@@ -272,7 +273,7 @@ export default {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    flex: 1;
+    flex: 2;
     @media (max-width: 900px) {
       padding: 0 50px;
     }
@@ -299,9 +300,10 @@ export default {
         margin-bottom: 8px;
 
         input {
+          border-radius: 8px;
           width: 100%;
           height: 50px;
-          border: none;
+          border-width: 1px;
           padding: 4px 4px 4px 30px;
           font-size: 16px;
           background-color: #f2f7f6;
@@ -314,7 +316,7 @@ export default {
         .icon {
           width: 12px;
           position: absolute;
-          left: 6px;
+          left: 12px;
         }
       }
     }
@@ -378,8 +380,7 @@ export default {
 
       .icon {
         width: 20px;
-        left: 10px;
-        position: absolute;
+        margin-right: 6px; /* Add margin to the right of the icon */
       }
     }
   }

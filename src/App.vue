@@ -38,14 +38,14 @@ export default {
   mounted() {},
   methods: {
     checkRoute() {
-      if (
-        this.$route.name === "Login" ||
-        this.$route.name === "Register" ||
-        this.$route.name === "ForgotPassword"
-      ) {
-        this.navigation = true;
-        return;
-      }
+      // if (
+      //   this.$route.name === "Login" ||
+      //   this.$route.name === "Register" ||
+      //   this.$route.name === "ForgotPassword"
+      // ) {
+      //   this.navigation = true;
+      //   return;
+      // }
       this.navigation = false;
     },
   },

@@ -27,7 +27,7 @@ export default {
   data() {
     return {
       adminEmail: "",
-      functionMsg: null
+      functionMsg: null,
     };
   },
   methods: {
@@ -35,8 +35,8 @@ export default {
       const addAdmin = await firebase.functions().httpsCallable("addAdminRole");
       const result = await addAdmin({ email: this.adminEmail });
       this.functionMsg = result.data.message;
-    }
-  }
+    },
+  },
 };
 </script>
 

@@ -8,16 +8,20 @@
           >
           <ul>
             <li>
-              <a href="#"><youTube class="svg-icon"/></a>
+              <a href="#"><youTube class="svg-icon" /></a>
             </li>
             <li>
-              <a href="#"><twitter class="svg-icon"/></a>
+              <a href="#"><twitter class="svg-icon" /></a>
             </li>
             <li>
-              <a href="#"><instagram class="svg-icon"/></a>
+              <a href="https://www.instagram.com/xavier9276/"
+                ><instagram class="svg-icon"
+              /></a>
             </li>
             <li>
-              <a href="#"><linkedin class="svg-icon"/></a>
+              <a href="https://www.linkedin.com/in/xavier-tan-849a2022b/"
+                ><linkedin class="svg-icon"
+              /></a>
             </li>
           </ul>
         </div>
@@ -55,7 +59,7 @@ export default {
     youTube,
     twitter,
     instagram,
-    linkedin
+    linkedin,
   },
   computed: {
     user() {
@@ -63,8 +67,8 @@ export default {
     },
     admin() {
       return this.$store.state.profileAdmin;
-    }
-  }
+    },
+  },
 };
 </script>
 

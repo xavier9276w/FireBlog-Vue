@@ -21,7 +21,7 @@
     <div v-if="!user" class="updates">
       <div class="container">
         <h2>never miss a travel post. Register for a free account today</h2>
-        <router-link class="router-button" to="#">
+        <router-link class="router-button" :to="{ name: 'Register' }">
           Register for Shareveler<Arrow class="arrow arrow-light" />
         </router-link>
       </div>
